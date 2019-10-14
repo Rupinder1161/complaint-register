@@ -20,3 +20,28 @@
 .App-link {
   color: #09d3ac;
 }
+
+body {
+  padding: 20px;
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+table{
+  text-align: center;
+  background-color: beige;
+  border-collapse: collapse;
+  width: 100%;
+}
+table, th, td {
+  
+}
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
