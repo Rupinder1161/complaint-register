@@ -16,48 +16,52 @@ class MyComponent extends React.Component {
     super(props);
     // change code below this line
      this.state = {
-       index:UUID.v4(),
+       index:UUID.v4(),  
       userInput: '',
-      devicename:'Baby kiffer',
+      devicename:[],
       toDoList: ['gurpreet','singh','hello'],
       date:''
     }
     // change code above this line
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.device = this.device.bind(this)
   }
-  device(e){
+  device(input){
     this.setState({
-      device:e.target.value
-    })
+      devicename: input
+    },() => console.log(input))
 
-  }
-  handleSubmit() {
-    var newArray = this.state.toDoList.slice(); 
-    newArray.push(this.state.userInput); 
-    
-    this.setState({
-      toDoList: newArray,
-      date: new Date().toLocaleString()
-    });
   }
   handleChange(e) {
     this.setState({
       userInput: e.target.value
+    } );
+  }
+  handleSubmit(input) {
+    var newArray = this.state.toDoList.slice(); 
+    newArray.push(input); 
+    const devi = this.state.devicename
+    const datea =  new Date().getTime()
+    this.setState({
+      toDoList: newArray,
+      date: datea,
+      devicename:devi
     });
   }
+ 
   render() {
-    const items = this.state.toDoList.map(i =><tr><td>{this.state.index}</td> <td>{i}</td><td>{i}</td><td><Button>approve</Button></td><td><Button>Declined</Button></td><td>{this.state.date}</td></tr>)
+    const items = this.state.toDoList.map(i =><tr><td>{this.state.index}</td><td>{this.state.devicename}</td><td>{i}</td><td><Button>approve</Button></td><td><Button>Declined</Button></td><td>{this.state.date}</td></tr>)
     return (
       <div style={style}>
         <form>
-        <input value={this.state.devicename} onChange={this.handleChange} placeholder='enter device name'/>
+        <input value={this.state.devicename} onChange={(e) => this.device(e.target.value)} placeholder='enter device name'/>
         <textarea
           onChange={this.handleChange}
           value={this.state.userInput}
           placeholder="Separate Items With Commas" /><br />
           </form>
-        <button onClick={this.handleSubmit}>Create List</button>
+        <button onClick={(e) => this.handleSubmit(e.target.value)}>Create List</button>
         <h1>My "To Do" List:</h1>
         <table>
         <tr>
@@ -69,9 +73,6 @@ class MyComponent extends React.Component {
              <th>Time</th>
          </tr>
          {items}
-        {/* <ul>
-        {items} {this.state.index}
-        </ul> */}
         </table>
       </div>
     );
