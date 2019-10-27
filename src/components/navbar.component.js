@@ -20,6 +20,7 @@ export default class Navbar extends Component {
           </li>
         </ul>
         </div>
+        <h6 style={{color:'red'}}>Shosha</h6>
       </nav>
     );
   }
